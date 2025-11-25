@@ -1,6 +1,6 @@
-import { useState } from 'react'
+import { useEffect, useReducer } from 'react'
 import './App.css'
-import arbol_laser from "./assets/arbol_laser.png";
+import torre from "./assets/torre.png";
 
 
 const initialState = {
@@ -17,7 +17,27 @@ const initialState = {
 function App() {
 
   function caramelReducer(state, action){
-    let outputState _
+    let outputState = state;
+
+      if (action.type == 'CLICK_SHOOT') {
+        outputState = {
+          ...state, damageDealt: state.damageDealt + state.clickMultiplier
+        }
+        else if (action.type == "AUTO_SHOOT") {
+          
+        }
+        else if (action.type == 'BUY_MULTIPLIER' && state.damageDealt >= state.multiplierPrice) {
+          outputState = {
+          ...state, clickMultiplier: state.clickMultiplier + 1, 
+           damageDealt: state.caramels - state.multiplierPrice,
+           multiplierPrice: Math.round(state.multiplierPrice * state.multplierPriceIncrement)
+        }
+        }
+      }
+
+
+
+
   }
 
   function caramelReducer(state, action) {
@@ -56,7 +76,7 @@ function App() {
         <div className='row justify-content-center'>
           <h1 className='col-12'>{Math.round(state.cookies)} 🍪</h1>
           <button className='col-5' onClick={() => dispatch({ type: 'CLICK_COOKIE' })}>
-            <img className='img-fluid' src={arbol_laser} />
+            <img className='img-fluid' src={torre} />
           </button>
         </div>
         <div className='row justify-content-center'>
