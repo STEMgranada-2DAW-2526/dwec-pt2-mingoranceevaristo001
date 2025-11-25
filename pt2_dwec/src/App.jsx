@@ -25,6 +25,7 @@ const initialState = {
   arbolLaser: 50,
 
   multiplierPriceIncrement: 1.2,
+  multiplierOleada : 1.1
 };
 
 export default function App() {
@@ -63,7 +64,9 @@ export default function App() {
       {
         ...state,
         numeroOleada: state.numeroOleada + 1,
-        damageDealt : 0
+        damageDealt : state.damageDealt=0,
+        caramels: caramels + 10,
+        waveGoal:  waveGoal * 1.1 
       }
       }
       
@@ -73,6 +76,7 @@ export default function App() {
   }
 
   const [state, dispatch] = useReducer(caramelReducer, initialState)
+  
 
   useEffect(() => {
     let timer = setInterval(() => {
@@ -86,6 +90,7 @@ export default function App() {
     <>
       <div className='container'>
         <div className='row justify-content-center'>
+          <h1 className='col-4'>{state.waveGoal} vida</h1>
           <h1 className='col-4'>{state.caramels} caramelos</h1>
           <h1 className='col-4'>{state.damageDealt} </h1>
           <h1 className='col-4'>{state.numeroOleada} </h1>
