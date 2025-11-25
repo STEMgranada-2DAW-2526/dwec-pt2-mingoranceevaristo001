@@ -1,10 +1,7 @@
 import { useState } from 'react'
 import './App.css'
 import arbol_laser from "./assets/arbol_laser.png";
-import cookieImg from "./assets/galleta.png";
-import cursorImg from "./assets/cursor.png";
-import grandmaImg from "./assets/abuela.png";
-import multiplierImg from "./assets/corre.png";
+
 
 const initialState = {
   damageDealt: 0,
@@ -18,7 +15,10 @@ const initialState = {
 };
 
 function App() {
-  const [count, setCount] = useState(0)
+
+  function caramelReducer(state, action){
+    let outputState _
+  }
 
   function caramelReducer(state, action) {
     let outputState = state;
@@ -26,7 +26,7 @@ function App() {
     if (action.type == 'CLICK_SHOOT') {
       outputState = { ...state, damageDealt: state.damageDealt + state.autoShotsPerSecond }
     }
-    else if (action.type == 'BUY_MULTIPLIER' && state.cookies >= state.multiplierPrice) {
+    else if (action.type == 'BUY_MULTIPLIER' && state.damageDealt >= state.autoShotsPerSecond) {
       outputState =
       {
         ...state,
@@ -52,12 +52,11 @@ function App() {
 
   return (
     <>
-      <div className='container'>
+       <div className='container'>
         <div className='row justify-content-center'>
-          <img class="img-fluid" src={arbol_laser}></img>
-          <h1 className='col-12'>{Math.round(state.damageDealt)} </h1>
+          <h1 className='col-12'>{Math.round(state.cookies)} 🍪</h1>
           <button className='col-5' onClick={() => dispatch({ type: 'CLICK_COOKIE' })}>
-            <img className='img-fluid' src={cookieImg} />
+            <img className='img-fluid' src={arbol_laser} />
           </button>
         </div>
         <div className='row justify-content-center'>
@@ -80,6 +79,7 @@ function App() {
           <p className='col-md-2 col-12'>{state.grandmaPrice} 🍪</p>
         </div>
       </div>
+
     </>
   )
 }
