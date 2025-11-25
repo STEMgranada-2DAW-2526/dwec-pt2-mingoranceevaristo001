@@ -43,18 +43,16 @@ export default function App() {
         multiplierPrice: Math.round(state.multiplierPrice * state.multiplierPriceIncrement)
       }
     }
-     else if (action.type == 'BUY_MULTIPLIER' && state.caramels >= state.multiplierPrice) {
+     else if (action.type == 'BUY_DAMAGE_UPGRADE' && state.caramels >= state.canionTurronPrecio) {
       outputState = {
-        ...state, autoShotsPerSecond: state.autoShotsPerSecond + 1,
-        caramels: state.caramels - state.multiplierPrice,
-        multiplierPrice: Math.round(state.multiplierPrice * state.multiplierPriceIncrement)
+        ...state, caramels: state.caramels - state.canionTurronPrecio
       }
     }
     else if (action.type == 'AUTO_SHOOT') {
       outputState =
       {
         ...state,
-        damageDealt: state.damageDealt + state.danioOleada * 0.1
+        damageDealt: state.damageDealt - state.danioOleada * 0.1
       }
 
     }
@@ -81,6 +79,7 @@ export default function App() {
           </button>
         </div>
         <div className='row justify-content-center'>
+          MEJORAS
           <button className='col-md-2 col-3' onClick={() => dispatch({ type: 'BUY_MULTIPLIER' })}>
             <img className='img-fluid' src={multiplicador} />
             
