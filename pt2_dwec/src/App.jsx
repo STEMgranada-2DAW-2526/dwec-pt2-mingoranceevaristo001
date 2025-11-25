@@ -3,7 +3,9 @@ import './App.css'
 import torre from "./assets/torre.png";
 import arbol_laser from "./assets/arbol_laser.png";
 import canion_turron from "./assets/canion_turron.png";
-import multiplicador from "./assets/torre.png";
+import multiplicador from "./assets/multiplicador.png";
+import reno_lanza_cohetes from "./assets/reno_lanza_cohetes.png";
+
 
 
 const initialState = {
@@ -28,7 +30,7 @@ export default function App() {
       outputState = {
         ...state, damageDealt: state.damageDealt + state.clickMultiplier
       }
-    } else if (action.type == 'BUY_MULTIPLIER' && state.damageDealt >= state.multiplierPrice) {
+    } else if (action.type == 'BUY_MULTIPLIER' && state.caramels >= state.multiplierPrice) {
       outputState = {
         ...state, clickMultiplier: state.clickMultiplier + 1,
         damageDealt: state.caramels - state.multiplierPrice,
@@ -66,23 +68,27 @@ export default function App() {
           </button>
         </div>
         <div className='row justify-content-center'>
-          <button className='col-md-2 col-12' onClick={() => dispatch({ type: 'BUY_CURSOR' })}>
-            <img className='img-fluid' src={cursorImg} />
-            x{state.cursorCount}
+          <button className='col-md-2 col-3' onClick={() => dispatch({ type: 'BUY_MULTIPLIER' })}>
+            <img className='img-fluid' src={multiplicador} />
+            
           </button>
-          <button className='col-md-2 col-12' onClick={() => dispatch({ type: 'BUY_MULTIPLIER' })}>
-            <img className='img-fluid' src={multiplierImg} />
+          <button className='col-md-2 col-3' onClick={() => dispatch({ type: 'BUY_MULTIPLIER' })}>
+            <img className='img-fluid' src={canion_turron} />
             x{state.clickMultiplier}
           </button>
-          <button className='col-md-2 col-12' onClick={() => dispatch({ type: 'BUY_GRANDMA' })}>
-            <img className='img-fluid' src={grandmaImg} />
-            x{state.grandmaCount}
+          <button className='col-md-2 col-3' onClick={() => dispatch({ type: 'BUY_GRANDMA' })}>
+            <img className='img-fluid' src={reno_lanza_cohetes} />
+            
+          </button>
+          <button className='col-md-2 col-3' onClick={() => dispatch({ type: 'BUY_GRANDMA' })}>
+            <img className='img-fluid' src={arbol_laser} />
+            
           </button>
         </div>
         <div className='row justify-content-center'>
-          <p className='col-md-2 col-12'>{state.cursorPrice} 🍪</p>
-          <p className='col-md-2 col-12'>{state.multiplierPrice} 🍪</p>
-          <p className='col-md-2 col-12'>{state.grandmaPrice} 🍪</p>
+          <p className='col-md-2 col-3'>{state.cursorPrice} </p>
+          <p className='col-md-2 col-3'>{state.multiplierPrice} </p>
+          <p className='col-md-2 col-3'>{state.grandmaPrice} </p>
         </div>
       </div>
 
