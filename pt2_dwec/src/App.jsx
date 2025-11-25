@@ -52,7 +52,7 @@ export default function App() {
       outputState =
       {
         ...state,
-        damageDealt: state.damageDealt - state.danioOleada * 0.1
+        damageDealt: state.damageDealt 
       }
 
     }
