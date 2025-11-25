@@ -14,7 +14,6 @@ const initialState = {
   waveGoal: 100,
   caramels: 20,
   damagePerShot: 1,
-  vidaOleada: 100,
 
   autoShotsPerSecond: 1,
   upgrades: [],
@@ -52,7 +51,7 @@ export default function App() {
       outputState =
       {
         ...state,
-        damageDealt: state.damageDealt 
+        damageDealt: state.damageDealt + 1
       }
 
     }
@@ -73,7 +72,9 @@ export default function App() {
     <>
       <div className='container'>
         <div className='row justify-content-center'>
-          <h1 className='col-12'>{Math.round(state.damageDealt)} </h1>
+          <h1 className='col-4'>{state.caramels} caramelos</h1>
+          <h1 className='col-4'>{state.damageDealt} </h1>
+          <h1 className='col-4'>{state.damageDealt} </h1>
           <button className='col-5' onClick={() => dispatch({ type: 'CLICK_SHOOT' })}>
             <img className='img-fluid' src={torre} />
           </button>
