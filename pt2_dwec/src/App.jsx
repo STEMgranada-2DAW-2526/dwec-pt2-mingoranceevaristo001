@@ -9,6 +9,7 @@ const initialState = {
   waveGoal: 100,
   caramels: 20,
   damagePerShot: 1,
+  danioOleada: 0,
 
   autoShotsPerSecond: 1,
   upgrades: []
@@ -18,21 +19,26 @@ function App() {
 
   function caramelReducer(state, action){
     let outputState = state;
+    const multiplierPriceIncrement = 1.2;
 
       if (action.type == 'CLICK_SHOOT') {
         outputState = {
           ...state, damageDealt: state.damageDealt + state.clickMultiplier
         }
-        else if (action.type == "AUTO_SHOOT") {
-          
-        }
-        else if (action.type == 'BUY_MULTIPLIER' && state.damageDealt >= state.multiplierPrice) {
+      }else if (action.type == 'BUY_MULTIPLIER' && state.damageDealt >= state.multiplierPrice) {
           outputState = {
           ...state, clickMultiplier: state.clickMultiplier + 1, 
            damageDealt: state.caramels - state.multiplierPrice,
-           multiplierPrice: Math.round(state.multiplierPrice * state.multplierPriceIncrement)
+           multiplierPrice: Math.round(state.multiplierPrice * state.multiplierPriceIncrement)
         }
         }
+        else if (action.type == 'AUTO_SHOOT') {
+      outputState =
+      {
+        ...state,
+        damageDealt: state.damageDealt + state.danioOleada * 0.1 + state.grandmaCount * 1
+      }
+    }
       }
 
 
@@ -40,33 +46,33 @@ function App() {
 
   }
 
-  function caramelReducer(state, action) {
-    let outputState = state;
+  // function caramelReducer(state, action) {
+  //   let outputState = state;
 
-    if (action.type == 'CLICK_SHOOT') {
-      outputState = { ...state, damageDealt: state.damageDealt + state.autoShotsPerSecond }
-    }
-    else if (action.type == 'BUY_MULTIPLIER' && state.damageDealt >= state.autoShotsPerSecond) {
-      outputState =
-      {
-        ...state,
-        autoShotsPerSecond: state.autoShotsPerSecond + 1,
-        cookies: state.cookies - state.multiplierPrice,
-        multiplierPrice: Math.round(state.multiplierPrice * state.multiplierPriceIncrement)
-      }
-    }
-    else if (action.type == 'BUY_DAMAGE_UPGRADE' && state.cookies >= state.cursorPrice) {
-      outputState =
-      {
-        ...state,
-        cursorCount: state.cursorCount + 1,
-        cookies: state.cookies - state.cursorPrice,
-        cursorPrice: Math.round(state.cursorPrice * state.cursorPriceIncrement)
-      }
-    }
+  //   if (action.type == 'CLICK_SHOOT') {
+  //     outputState = { ...state, damageDealt: state.damageDealt + state.autoShotsPerSecond }
+  //   }
+  //   else if (action.type == 'BUY_MULTIPLIER' && state.damageDealt >= state.autoShotsPerSecond) {
+  //     outputState =
+  //     {
+  //       ...state,
+  //       autoShotsPerSecond: state.autoShotsPerSecond + 1,
+  //       cookies: state.cookies - state.multiplierPrice,
+  //       multiplierPrice: Math.round(state.multiplierPrice * state.multiplierPriceIncrement)
+  //     }
+  //   }
+  //   else if (action.type == 'BUY_DAMAGE_UPGRADE' && state.cookies >= state.cursorPrice) {
+  //     outputState =
+  //     {
+  //       ...state,
+  //       cursorCount: state.cursorCount + 1,
+  //       cookies: state.cookies - state.cursorPrice,
+  //       cursorPrice: Math.round(state.cursorPrice * state.cursorPriceIncrement)
+  //     }
+  //   }
 
-    return outputState;
-  }
+  //   return outputState;
+  // }
 
   const [state, dispatch] = useReducer(caramelReducer, initialState)
 
