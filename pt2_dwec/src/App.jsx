@@ -14,6 +14,7 @@ const initialState = {
   waveGoal: 100,
   caramels: 20,
   damagePerShot: 1,
+  numeroOleada: 1,
 
   autoShotsPerSecond: 1,
   upgrades: [],
@@ -33,7 +34,8 @@ export default function App() {
 
     if (action.type == 'CLICK_SHOOT') {
       outputState = {
-        ...state, damageDealt: state.damageDealt + state.clickMultiplier
+        ...state, 
+        damageDealt: state.damageDealt +1
       }
     } else if (action.type == 'BUY_MULTIPLIER' && state.caramels >= state.multiplierPrice) {
       outputState = {
@@ -55,6 +57,18 @@ export default function App() {
       }
 
     }
+    else if (action.type == 'NEXT_WAVE') {
+      if (state.damageDealt >=100) {
+        outputState =
+      {
+        ...state,
+        numeroOleada: state.numeroOleada + 1,
+        damageDealt : 0
+      }
+      }
+      
+
+    }
     return outputState;
   }
 
@@ -74,7 +88,7 @@ export default function App() {
         <div className='row justify-content-center'>
           <h1 className='col-4'>{state.caramels} caramelos</h1>
           <h1 className='col-4'>{state.damageDealt} </h1>
-          <h1 className='col-4'>{state.damageDealt} </h1>
+          <h1 className='col-4'>{state.numeroOleada} </h1>
           <button className='col-5' onClick={() => dispatch({ type: 'CLICK_SHOOT' })}>
             <img className='img-fluid' src={torre} />
           </button>
