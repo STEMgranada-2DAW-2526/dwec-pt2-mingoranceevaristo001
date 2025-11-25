@@ -1,6 +1,9 @@
 import { useEffect, useReducer } from 'react'
 import './App.css'
 import torre from "./assets/torre.png";
+import arbol_laser from "./assets/arbol_laser.png";
+import canion_turron from "./assets/canion_turron.png";
+import multiplicador from "./assets/torre.png";
 
 
 const initialState = {
@@ -57,10 +60,29 @@ export default function App() {
     <>
       <div className='container'>
         <div className='row justify-content-center'>
-          <h1 className='col-12'>{Math.round(state.damageDealt)} 🍪</h1>
+          <h1 className='col-12'>{Math.round(state.damageDealt)} </h1>
           <button className='col-5' onClick={() => dispatch({ type: 'CLICK_SHOOT' })}>
             <img className='img-fluid' src={torre} />
           </button>
+        </div>
+        <div className='row justify-content-center'>
+          <button className='col-md-2 col-12' onClick={() => dispatch({ type: 'BUY_CURSOR' })}>
+            <img className='img-fluid' src={cursorImg} />
+            x{state.cursorCount}
+          </button>
+          <button className='col-md-2 col-12' onClick={() => dispatch({ type: 'BUY_MULTIPLIER' })}>
+            <img className='img-fluid' src={multiplierImg} />
+            x{state.clickMultiplier}
+          </button>
+          <button className='col-md-2 col-12' onClick={() => dispatch({ type: 'BUY_GRANDMA' })}>
+            <img className='img-fluid' src={grandmaImg} />
+            x{state.grandmaCount}
+          </button>
+        </div>
+        <div className='row justify-content-center'>
+          <p className='col-md-2 col-12'>{state.cursorPrice} 🍪</p>
+          <p className='col-md-2 col-12'>{state.multiplierPrice} 🍪</p>
+          <p className='col-md-2 col-12'>{state.grandmaPrice} 🍪</p>
         </div>
       </div>
 
