@@ -23,6 +23,8 @@ const initialState = {
   canionTurronPrecio: 15,
   renosLanzaPrecio: 30,
   arbolLaser: 50,
+  
+  caramelsIncrement: 10,
 
   multiplierPriceIncrement: 1.2,
   multiplierOleada : 1.1
@@ -59,14 +61,14 @@ export default function App() {
 
     }
     else if (action.type == 'NEXT_WAVE') {
-      if (state.damageDealt >=100) {
+      if (state.damageDealt =100) {
         outputState =
       {
         ...state,
         numeroOleada: state.numeroOleada + 1,
-        damageDealt : state.damageDealt=0,
-        caramels: caramels + 10,
-        waveGoal:  waveGoal * 1.1 
+        damageDealt : state.damageDealt - state.damageDealt,
+        caramels: state.caramels + state.caramelsIncrement,
+        waveGoal:  state.waveGoal * state.multiplierOleada 
       }
       }
       
