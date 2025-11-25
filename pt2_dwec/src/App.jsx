@@ -17,14 +17,20 @@ const initialState = {
   vidaOleada: 100,
 
   autoShotsPerSecond: 1,
-  upgrades: []
+  upgrades: [],
+
+  multiplierPrice: 10,
+  canionTurronPrecio: 15,
+  renosLanzaPrecio: 30,
+  arbolLaser: 50,
+
+  multiplierPriceIncrement: 1.2,
 };
 
 export default function App() {
 
   function caramelReducer(state, action) {
     let outputState = state;
-    const multiplierPriceIncrement = 1.2;
 
     if (action.type == 'CLICK_SHOOT') {
       outputState = {
@@ -32,8 +38,15 @@ export default function App() {
       }
     } else if (action.type == 'BUY_MULTIPLIER' && state.caramels >= state.multiplierPrice) {
       outputState = {
-        ...state, clickMultiplier: state.clickMultiplier + 1,
-        damageDealt: state.caramels - state.multiplierPrice,
+        ...state, autoShotsPerSecond: state.autoShotsPerSecond + 1,
+        caramels: state.caramels - state.multiplierPrice,
+        multiplierPrice: Math.round(state.multiplierPrice * state.multiplierPriceIncrement)
+      }
+    }
+     else if (action.type == 'BUY_MULTIPLIER' && state.caramels >= state.multiplierPrice) {
+      outputState = {
+        ...state, autoShotsPerSecond: state.autoShotsPerSecond + 1,
+        caramels: state.caramels - state.multiplierPrice,
         multiplierPrice: Math.round(state.multiplierPrice * state.multiplierPriceIncrement)
       }
     }
@@ -86,7 +99,7 @@ export default function App() {
           </button>
         </div>
         <div className='row justify-content-center'>
-          <p className='col-md-2 col-3'>{state.cursorPrice} </p>
+          <p className='col-md-2 col-3'>{state.multiplierPrice} </p>
           <p className='col-md-2 col-3'>{state.multiplierPrice} </p>
           <p className='col-md-2 col-3'>{state.grandmaPrice} </p>
         </div>
