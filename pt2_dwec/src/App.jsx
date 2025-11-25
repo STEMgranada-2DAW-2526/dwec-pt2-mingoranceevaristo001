@@ -23,13 +23,22 @@ function App() {
     let outputState = state;
     
      if (action.type == 'CLICK_CANION') {
-      outputState = { ...state, damageDealt: state.damageDealt + state.damagePerShot }
+      outputState = { ...state, damageDealt: state.damageDealt + state.autoShotsPerSecond }
+    }
+    else if (action.type == 'BUY_MULTIPLIER' && state.cookies >= state.multiplierPrice) {
+      outputState =
+      {
+        ...state,
+        autoShotsPerSecond: state.autoShotsPerSecond + 1,
+        cookies: state.cookies - state.multiplierPrice,
+        multiplierPrice: Math.round(state.multiplierPrice * state.multiplierPriceIncrement)
+      }
     }
 
     return outputState;
   }
 
-  const [state, dispatch] = useReducer(caramelReducer, INITIAL_STATE)
+  const [state, dispatch] = useReducer(caramelReducer, initialState)
 
   return (
     <>
